@@ -11,7 +11,7 @@ import pandas as pd
 
 def load_financial_xls(path):
     # Load sheets
-    bs = pd.read_excel(path, sheet_name="Balance Sheet")
+    bs = pd.read_excel(path, sheet_name="Balance Sheet", engine="openpyxl")
     is_ = pd.read_excel(path, sheet_name="Income Statement")
     cf = pd.read_excel(path, sheet_name="Cash Flow")
 

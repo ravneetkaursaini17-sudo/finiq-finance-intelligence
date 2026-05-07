@@ -251,7 +251,7 @@ with st.sidebar:
 from load_financials_csv import load_financial_xls
 
 if mode == "Demo (Apple sample)":
-    df = load_financial_xls("apple_financials.xls")   # your demo file
+   df = load_financial_xls("apple_financials.xlsx") # your demo file
 else:
     if uploaded_file is not None:
         df = load_financial_xls(uploaded_file)
