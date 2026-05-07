@@ -254,7 +254,7 @@ peer_file = st.sidebar.file_uploader(
 # DATA LOADING (DEMO + CUSTOM)
 # =========================
 
-col_mode, col_upload, col_peer, col_pdf = st.columns([1.2, 2.2, 2.0, 1.6])
+col_mode, col_upload, col_pdf = st.columns([1.2, 2.2, 2.0, 1.6])
 
 with col_mode:
     mode = st.radio(
