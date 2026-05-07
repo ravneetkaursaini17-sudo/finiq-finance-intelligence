@@ -260,13 +260,6 @@ else:
 
 model = FinancialModel(df)
 
-st.write("DEBUG — model latest row:")
-st.write(model.df.iloc[-1])
-st.write("DEBUG — model latest revenue:")
-st.write(model.df.iloc[-1]["revenue"])
-
-
-
 
 
 peer_model = None
