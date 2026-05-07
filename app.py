@@ -254,7 +254,7 @@ peer_file = st.sidebar.file_uploader(
 # DATA LOADING (DEMO + CUSTOM)
 # =========================
 
-col_mode, col_upload, col_pdf = st.columns([1.2, 2.2, 2.0, 1.6])
+col_mode, col_upload, col_peer, col_pdf = st.columns([1.2, 2.2, 2.0, 1.6])
 
 with col_mode:
     mode = st.radio(
@@ -275,6 +275,7 @@ with col_upload:
             help="CSV must contain: year, revenue, cogs, opex, net_income, cfo, cfi, cff, cash, total_debt, equity, ar, ap, inventory, interest_expense, total_assets",
         )
 
+# Sidebar peer uploader (only one)
 peer_file = st.sidebar.file_uploader(
     "Peer File (Optional)",
     type=["csv", "xls", "xlsx"]
