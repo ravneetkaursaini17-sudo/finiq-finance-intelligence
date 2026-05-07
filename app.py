@@ -12,7 +12,7 @@ Created on Tue May  5 20:35:40 2026
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pdfkit
+
 from io import BytesIO
 
 
