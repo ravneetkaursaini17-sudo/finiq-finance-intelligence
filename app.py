@@ -34,6 +34,9 @@ from finiq_engine import (
     plot_waterfall_income,
 )
 
+
+
+
 # =========================
 # PAGE CONFIG & STYLE
 # =========================
@@ -44,12 +47,23 @@ st.set_page_config(
     page_icon="💼",
 )
 
+
+# =========================
+# COLORS
+# =========================
+
 PRIMARY_NAVY = "#0A1A2F"
 GOLD = "#D4AF37"
 WHITE = "#FFFFFF"
 LIGHT_GRAY = "#F5F7FA"
 TEAL = "#1ABC9C"
 RED = "#E74C3C"
+
+
+
+# =========================
+# GLOBAL CSS / STYLE
+# =========================
 
 
 st.markdown(
@@ -195,15 +209,46 @@ st.markdown(
 
 st.markdown(
     """
-    <div class="finiq-header">
-        <div class="finiq-title">FINIQ — FINANCE INTELLIGENCE QUOTIENT</div>
-        <div class="finiq-subtitle">
-            CFO‑GRADE FINANCIAL INTELLIGENCE: EQ SCORE • CASH VS PROFIT • WORKING CAPITAL • SCENARIOS • RISK & COVENANTS
-        </div>
-    </div>
+    <h1 style='text-align: center; color: #4CAF50; margin-bottom: 10px;'>
+        FINIQ — Finance Intelligence Dashboard
+    </h1>
+    <p style='text-align: center; color: #CCCCCC; font-size: 16px; margin-top: -10px;'>
+        CFO‑Grade Financial Insights & Scenario Modeling
+    </p>
     """,
     unsafe_allow_html=True
 )
+
+st.markdown("---")
+
+
+# =========================
+# SIDEBAR INPUTS
+# =========================
+st.sidebar.title("⚙️ Configuration")
+
+mode = st.sidebar.selectbox(
+    "Mode",
+    ["Demo (Apple sample)", "Upload your own file"],
+)
+
+uploaded_file = None
+peer_file = None
+
+if mode == "Upload your own file":
+    uploaded_file = st.sidebar.file_uploader(
+        "Upload main financials file (Excel)",
+        type=["xlsx", "xls"],
+    )
+
+peer_file = st.sidebar.file_uploader(
+    "Optional: Upload peer company file (CSV)",
+    type=["csv"],
+    )
+
+
+
+
 
 # =========================
 # DATA LOADING (DEMO + CUSTOM)
@@ -251,16 +296,14 @@ with st.sidebar:
 from load_financials_csv import load_financial_xls
 
 if mode == "Demo (Apple sample)":
-   df = load_financial_xls("apple_financials.xlsx") # your demo file
+    df = load_financial_xls("apple_financials.xlsx")
 else:
     if uploaded_file is not None:
         df = load_financial_xls(uploaded_file)
     else:
-        df = pd.DataFrame()   # empty fallback
+        df = pd.DataFrame()
 
 model = FinancialModel(df)
-
-
 
 peer_model = None
 if peer_file is not None:
@@ -269,6 +312,10 @@ if peer_file is not None:
         peer_model = FinancialModel(df_peer)
     except Exception as e:
         st.error(f"Peer file error: {e}")
+                 
+        
+        
+
 
 # =========================
 # EXECUTIVE SUMMARY
@@ -646,14 +693,13 @@ if peer_model is not None:
     with pc_right:
         st.markdown('<div class="finiq-card">', unsafe_allow_html=True)
         st.markdown(
-            "<div class='finiq-narrative-title'>Peer Interpretation</div>",
-            unsafe_allow_html=True,
+        "<div class='finiq-narrative-title'>Peer Interpretation</div>",
+        unsafe_allow_html=True,
         )
         st.markdown(
-            "<div class='finiq-narrative'>The peer comparison highlights where the company leads on scale, margins, "
-            "cash conversion, and balance sheet resilience versus a chosen benchmark. Persistent gaps in CCC, "
-            "net leverage, or interest coverage often signal where execution or capital structure needs attention.</div>",
-            unsafe_allow_html=True,
+        "<div class='finiq-narrative'>The peer comparison highlights where the company leads on scale, margins, "
+        "cash conversion, and balance sheet resilience versus a chosen benchmark. Persistent gaps in CCC, "
+        "net leverage, or interest coverage often signal where execution or capital structure needs attention.</div>",
+        unsafe_allow_html=True,
         )
         st.markdown("</div>", unsafe_allow_html=True)
-
