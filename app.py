@@ -275,18 +275,10 @@ with col_upload:
             help="CSV must contain: year, revenue, cogs, opex, net_income, cfo, cfi, cff, cash, total_debt, equity, ar, ap, inventory, interest_expense, total_assets",
         )
 
-with st.sidebar:
-    st.markdown(
-        "<div style='font-size:14px; font-weight:600; color:white; margin-bottom:6px;'>Peer File (Optional)</div>",
-        unsafe_allow_html=True
-    )
-
-    peer_file = st.file_uploader(
-        "Upload peer file",
-        type=["csv", "xls", "xlsx"],
-        label_visibility="collapsed"
-    )
-
+peer_file = st.sidebar.file_uploader(
+    "Peer File (Optional)",
+    type=["csv", "xls", "xlsx"]
+)
 
 
 # =========================
